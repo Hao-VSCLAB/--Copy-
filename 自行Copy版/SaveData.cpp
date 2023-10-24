@@ -12,24 +12,46 @@ void SaveData_CreateFile(char *path)
 	/* fopen(
 			string filename,		// 檔案路徑及名字
 			string mode)			// "w" Open for writing only;*/
+
 	SaveDataFile = fopen(path, "w");
 
 }
 
 //================ 寫入實驗資料檔 ================
 
-void SaveData_Data(double a, double b, double c, double d, double e)
+void SaveData_Data(double a[], double b[], double c[], double d[], double e[], double f[])
 {
-	fprintf(SaveDataFile, "%f\t", a);
-	fprintf(SaveDataFile, "%f\t", b);
-	fprintf(SaveDataFile, "%f\t", c);
-	fprintf(SaveDataFile, "%f\t", d);
-	fprintf(SaveDataFile, "%f\t", e);
+	for (int i = 0; i < AXIS; i++)
+	{
+		fprintf(SaveDataFile, "%f\t", a[i]);
+	}
+	for (int i = 0; i < AXIS; i++)
+	{
+		fprintf(SaveDataFile, "%f\t", b[i]);
+	}
+	for (int i = 0; i < AXIS; i++)
+	{
+		fprintf(SaveDataFile, "%f\t", c[i]);
+	}
+
+	for (int i = 0; i < AXIS; i++)
+	{
+		fprintf(SaveDataFile, "%f\t", d[i]);
+	}
+	for (int i = 0; i < AXIS; i++)
+	{
+		fprintf(SaveDataFile, "%f\t", e[i]);
+	}
+	for (int i = 0; i < AXIS; i++)
+	{
+		fprintf(SaveDataFile, "%f\t", f[i]);
+	}
 
 
 	fprintf(SaveDataFile, "\n");
 }
 
+/*
 //================ 寫入實驗資料檔 ================
 
 void SaveData_Data(double a[])
@@ -41,6 +63,7 @@ void SaveData_Data(double a[])
 
 	fprintf(SaveDataFile, "\n");
 }
+*/
 
 //================ 關閉實驗資料檔 ================
 

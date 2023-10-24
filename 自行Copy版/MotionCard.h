@@ -9,10 +9,12 @@
 void MotionCard_OpenCard();
 void MotionCard_CloseCard();
 void MotionCard_ServoOn();
-void MotionCard_Serco_Off();
-void MotionCard_Encoder(double(&JointEncRad));
-void MotionCard_DAC(double(&JointTorCtrl));
-void MotionCard_DAC(double(&JointTorCtrl), double(&Voltage));
+void MotionCard_ServoOff();
+//void MotionCard_Encoder(double(&JointEncRad));
+void MotionCard_Encoder(double(&RobotPosRad[AXIS]));
+//void MotionCard_DAC(double(&JointTorCtrl));
+//void MotionCard_DAC(double(&JointTorCtrl), double(&Voltage));
+void MotionCard_DAC(double RobotTorCtrl[AXIS]);
 void MotionCard_ChangeTimer(TMRISR Timer);
 
 #endif
