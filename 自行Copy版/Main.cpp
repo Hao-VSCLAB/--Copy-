@@ -3,17 +3,17 @@
 #include "SaveData.h"
 #include "Toolbox.h"
 
-char INPUT_FILENAME[] = "C:\\Users\\VSCLAB\\Desktop\\Group\\¹Å¯C\\1_Scurve\\Scurve\\data\\input\\command.txt";
-char OUTPUT_FILENAME[] = "C:\\Users\\VSCLAB\\Desktop\\Group\\¹Å¯C\\1_Scurve\\Scurve\\data\\output\\output.txt";
+char INPUT_FILENAME[] = "C:\\Users\\VSCLAB\\Desktop\\Group\\ï¿½Å¯C\\1_Scurve\\Scurve\\data\\input\\command.txt";
+char OUTPUT_FILENAME[] = "C:\\Users\\VSCLAB\\Desktop\\Group\\ï¿½Å¯C\\1_Scurve\\Scurve\\data\\output\\output.txt";
 using namespace std;
-
-double Pos = { 0.0 }; // ½s½X¾¹¨¤«×
-double Vel = { 0.0 }; // LSF³t«×
+// 1314520
+double Pos = { 0.0 }; // ï¿½sï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+double Vel = { 0.0 }; // LSFï¿½tï¿½ï¿½
 double Vol = { 0.0 };
-double PosCmd = { 0.0 }; // ¨¤«×©R¥O
-double VelCmd = { 0.0 }; // ³t«×©R¥O
-double AccCmd = { 0.0 }; // ¥[³t«×©R¥O
-double TorCtrl = { 0.0 }; // Âà¯x±±¨î°T¸¹
+double PosCmd = { 0.0 }; // ï¿½ï¿½ï¿½×©Rï¿½O
+double VelCmd = { 0.0 }; // ï¿½tï¿½×©Rï¿½O
+double AccCmd = { 0.0 }; // ï¿½[ï¿½tï¿½×©Rï¿½O
+double TorCtrl = { 0.0 }; // ï¿½ï¿½xï¿½ï¿½ï¿½ï¿½Tï¿½ï¿½
 double TorCtrl_Feedback = { 0.0 };
 double *pos = NULL;
 double *spd = NULL;
@@ -27,7 +27,7 @@ int count_initial = 0;
 FILE *C_openFile(const char *fileName, const char *mode);
 void alloc_mem(int n);
 
-//=================±±¨î¾¹=============//
+//=================ï¿½ï¿½ï¿½î¾¹=============//
 void Control_Feedback(double Pos, double Vel, double PosCmd, double VelCmd, double AccCmd, double(&TorCtrl))
 {
 	double Jm = 1.6831E-04;
@@ -40,71 +40,71 @@ void Control_Feedback(double Pos, double Vel, double PosCmd, double VelCmd, doub
 	TorCtrl_Feedback = ba[i] * (Ka[i] * (PosCmd - Pos) - Vel);
 	TorCtrl = TorCtrl_Feedback;
 }
-//===============±±¨î½w½Ä============//
+//===============ï¿½ï¿½ï¿½ï¿½wï¿½ï¿½============//
 
 void _stdcall Timer_Stay(TMRINT *pstINTSource)
 {
-	//----------------------- Àx¦sÅª¨ú¨¤«×¡B³t«× -----------------------
-	MotionCard_Encoder(Pos); // ¾÷ºc¨¤«×
-	Toolbox_LSF(Pos, Vel); // ¾÷ºc³t«×
+	//----------------------- ï¿½xï¿½sÅªï¿½ï¿½ï¿½ï¿½ï¿½×¡Bï¿½tï¿½ï¿½ -----------------------
+	MotionCard_Encoder(Pos); // ï¿½ï¿½ï¿½cï¿½ï¿½ï¿½ï¿½
+	Toolbox_LSF(Pos, Vel); // ï¿½ï¿½ï¿½cï¿½tï¿½ï¿½
 
-	//----------------------- ±±¨î -----------------------
+	//----------------------- ï¿½ï¿½ï¿½ï¿½ -----------------------
 
-	Control_Feedback(Pos, Vel, PosCmd, VelCmd, AccCmd, TorCtrl); // ¦^±Â±±¨î
+	Control_Feedback(Pos, Vel, PosCmd, VelCmd, AccCmd, TorCtrl); // ï¿½^ï¿½Â±ï¿½ï¿½ï¿½
 
-	MotionCard_DAC(TorCtrl); // °e¥X±±¨î©R¥O
-	//----------------------- ¤Á´«¤¤Â_ -----------------------
+	MotionCard_DAC(TorCtrl); // ï¿½eï¿½Xï¿½ï¿½ï¿½ï¿½Rï¿½O
+	//----------------------- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½_ -----------------------
 
-	if (TimerFlag == 0 && StayCount >= 1000) // ½w½Ä 1
+	if (TimerFlag == 0 && StayCount >= 1000) // ï¿½wï¿½ï¿½ 1
 	{
 
 		TimerFlag = 1;
-		cout << "---------- ½w½Ä1 µ²§ô ----------" << endl;
+		cout << "---------- ï¿½wï¿½ï¿½1 ï¿½ï¿½ï¿½ï¿½ ----------" << endl;
 
 	}
-	else if (TimerFlag == 2 && StayCount >= 2000) // ½w½Ä 2
+	else if (TimerFlag == 2 && StayCount >= 2000) // ï¿½wï¿½ï¿½ 2
 	{
 
 		TimerFlag = 3;
-		cout << "---------- ½w½Ä2 µ²§ô ----------" << endl;
+		cout << "---------- ï¿½wï¿½ï¿½2 ï¿½ï¿½ï¿½ï¿½ ----------" << endl;
 
 	}
-	else if (TimerFlag == 4 && StayCount >= 3000) // ½w½Ä 3
+	else if (TimerFlag == 4 && StayCount >= 3000) // ï¿½wï¿½ï¿½ 3
 	{
 
 		TimerFlag = 5;
-		cout << "---------- ½w½Ä3 µ²§ô ----------" << endl;
+		cout << "---------- ï¿½wï¿½ï¿½3 ï¿½ï¿½ï¿½ï¿½ ----------" << endl;
 
 	}
-	else if (TimerFlag == 5 && StayCount >= 4000) // ½w½Ä4
+	else if (TimerFlag == 5 && StayCount >= 4000) // ï¿½wï¿½ï¿½4
 	{
 		TimerFlag = 6;
-		cout << "---------- ½w½Ä4 µ²§ô ----------" << endl;
+		cout << "---------- ï¿½wï¿½ï¿½4 ï¿½ï¿½ï¿½ï¿½ ----------" << endl;
 	}
 	//SaveData_Data(Pos, Vel, PosCmd, VelCmd, Vol);
 	StayCount++;
 }
-//==============Åý¶b¥dÂà´«FUNCTION  (¹q¸£¥»¨­»P¶b¥d¬°¤£¦Pªº­ÓÅé)=======//
+//==============ï¿½ï¿½ï¿½bï¿½dï¿½à´«FUNCTION  (ï¿½qï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Pï¿½bï¿½dï¿½ï¿½ï¿½ï¿½ï¿½Pï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)=======//
 
 void _stdcall InitialPos(TMRINT *pstINTSource){
-	MotionCard_Encoder(Pos); // ¾÷ºc¨¤«×
-	Toolbox_LSF(Pos, Vel); // ¾÷ºc³t«×
+	MotionCard_Encoder(Pos); // ï¿½ï¿½ï¿½cï¿½ï¿½ï¿½ï¿½
+	Toolbox_LSF(Pos, Vel); // ï¿½ï¿½ï¿½cï¿½tï¿½ï¿½
 
-	//----------------------- ±±¨î -----------------------
+	//----------------------- ï¿½ï¿½ï¿½ï¿½ -----------------------
 
-	Control_Feedback(Pos, Vel, 0.0, 0.0, 0.0, TorCtrl); // ¦^±Â±±¨î        ////////////////////////
+	Control_Feedback(Pos, Vel, 0.0, 0.0, 0.0, TorCtrl); // ï¿½^ï¿½Â±ï¿½ï¿½ï¿½        ////////////////////////
 
-	MotionCard_DAC(TorCtrl); // °e¥X±±¨î©R¥O
+	MotionCard_DAC(TorCtrl); // ï¿½eï¿½Xï¿½ï¿½ï¿½ï¿½Rï¿½O
 	count_initial++;
 	if (count_initial > 1000) TimerFlag = 2;
 }
 
 void _stdcall Tracking(TMRINT *pstINTSource)
 {
-	//---------------------- Åª¨ú¨¤«×¡B³t«× ----------------------
+	//---------------------- Åªï¿½ï¿½ï¿½ï¿½ï¿½×¡Bï¿½tï¿½ï¿½ ----------------------
 
-	MotionCard_Encoder(Pos); // ¾÷ºc¨¤«×(rad)
-	Toolbox_LSF(Pos, Vel); // ¾÷ºc¨¤³t«×(rad/s)
+	MotionCard_Encoder(Pos); // ï¿½ï¿½ï¿½cï¿½ï¿½ï¿½ï¿½(rad)
+	Toolbox_LSF(Pos, Vel); // ï¿½ï¿½ï¿½cï¿½ï¿½ï¿½tï¿½ï¿½(rad/s)
 
 	//---------------------- PTP Control ----------------------
 	PosCmd = pos[j];
@@ -115,7 +115,7 @@ void _stdcall Tracking(TMRINT *pstINTSource)
 
 	MotionCard_DAC(TorCtrl, Vol);
 
-	////----------------------- Àx¦s¹êÅç¸ê®Æ -----------------------
+	////----------------------- ï¿½xï¿½sï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ -----------------------
 
 	if (TimerFlag == 3)
 	{
@@ -130,7 +130,7 @@ void _stdcall Tracking(TMRINT *pstINTSource)
 }
 
 int main(){
-	//=================Åª¨ú¨Ó¦Ûmatlab­pºâ§¹ªº¼Æ¾Ú===================//
+	//=================Åªï¿½ï¿½ï¿½Ó¦ï¿½matlabï¿½pï¿½â§¹ï¿½ï¿½ï¿½Æ¾ï¿½===================//
 	FILE *fp = C_openFile(INPUT_FILENAME, "r");
 	// Get File Line Number
 	char flag;
@@ -146,25 +146,25 @@ int main(){
 
 	double inipos = pos[0];
 
-	//=================¼g¤J¾÷±ñ¼Æ¾Ú===================//
+	//=================ï¿½gï¿½Jï¿½ï¿½ï¿½ï¿½Æ¾ï¿½===================//
 	SaveData_CreateFile(OUTPUT_FILENAME);
 
-	//=================¶}±Ò¦U¶µ¥\¯à===================//
+	//=================ï¿½}ï¿½Ò¦Uï¿½ï¿½ï¿½\ï¿½ï¿½===================//
 	printf("Press 'Esc' to end program.\n");
 	printf("Press any key to start !\n");
 
-	while (_kbhit() == 0); // «ö¥ô·NÁä¶}©lµ{¦¡
-	MotionCard_OpenCard(); // ¶}±Ò¶b¥d
-	Toolbox_LSF_Initialization(PosCmd); // ªì©l¤Æ LSF
+	while (_kbhit() == 0); // ï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½ï¿½}ï¿½lï¿½{ï¿½ï¿½
+	MotionCard_OpenCard(); // ï¿½}ï¿½Ò¶bï¿½d
+	Toolbox_LSF_Initialization(PosCmd); // ï¿½ï¿½lï¿½ï¿½ LSF
 	MotionCard_ServoOn(); // Servo On
-	//=================¾Þ§@¬yµ{======================//
+	//=================ï¿½Þ§@ï¿½yï¿½{======================//
 	int sw = 0;
 	while (sw != 0x1b){
-		//=================«öESCµ²§ôµ{¦¡======================//
+		//=================ï¿½ï¿½ESCï¿½ï¿½ï¿½ï¿½ï¿½{ï¿½ï¿½======================//
 		if (_kbhit())
 		{
 
-			sw = _getch(); // «öESCµ²§ôµ{¦¡
+			sw = _getch(); // ï¿½ï¿½ESCï¿½ï¿½ï¿½ï¿½ï¿½{ï¿½ï¿½
 
 		}
 
@@ -206,7 +206,7 @@ int main(){
 	}
 
 	MotionCard_Serco_Off(); // Servo Off
-	MotionCard_CloseCard(); // Ãö³¬¶b¥d
+	MotionCard_CloseCard(); // ï¿½ï¿½ï¿½ï¿½ï¿½bï¿½d
 	SaveData_CloseFile();
 	fclose(fp);
 
